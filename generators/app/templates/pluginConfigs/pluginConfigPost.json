@@ -1,0 +1,7 @@
+{
+	"templateSelectorPackageName": "template-selector",
+	"templateSelectorInstallPath": "plugins/templateSelector",
+	"forceReinstall": true,
+	"postProcessorPackageName": "post-processor",
+	"postProcessorInstallPath": "plugins/postProcessor"
+}

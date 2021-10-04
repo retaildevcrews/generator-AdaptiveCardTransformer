@@ -1,0 +1,5 @@
+{
+	"templateSelectorPackageName": "template-selector",
+	"templateSelectorInstallPath": "plugins/templateSelector",
+	"forceReinstall": true
+}
