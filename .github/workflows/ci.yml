@@ -60,7 +60,5 @@ jobs:
         with:
           fail_on_error: true
 
-      - name: npm build and test
-        run: |
-          npm run build
-          npm test
+      - name: npm test
+        run: npm test
