@@ -1,7 +1,7 @@
 {
 	"name": "generator-AdaptiveCardTransformer",
 	"version": "0.1.0",
-	"description": "Create echo bot and plugins for use with adaptive card tran",
+	"description": "Create echo bot and plugins for use with adaptive card tranformer",
 	"main": "generators/index.js",
 	"scripts": {
 		"lint": "eslint --max-warnings=0 '**/*.js'",
