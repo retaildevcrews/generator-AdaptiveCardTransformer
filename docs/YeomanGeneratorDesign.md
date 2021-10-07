@@ -2,13 +2,13 @@
 
 ## Yeoman Generator for the `Adaptive Card Transformer`
 
-Yeoman is a tool that helps you kickstart new projects. It allows you to scaffold project files and prescribe best practices for particular tools. Yeoman provides a generator ecosystem. A generator is basically a plugin that can be run with the `yo` command to scaffold complete projects or useful parts of a project.
+[Yeoman](https://yeoman.io/) is a tool that helps you kickstart new projects. It allows you to scaffold project files and prescribe best practices for certain tools. Yeoman provides a generator ecosystem. A generator is basically a plugin that can be run with the `yo` command to scaffold complete projects or useful parts of a project.
 
-To use the `Adaptive Card Transformer`, you will need plugins with parituclar function signatures, as well as a bot. To kickstart use of the `Adaptive Card Transformer` and ease integration, the `generator-AdaptiveCardTransformer` was created. This generator scaffolds plugins, an echo bot, and supports integration between the `Adaptive Card Transformer` and the echo bot. To scaffold an echo bot within the `generator-AdaptiveCardTransformer`, we will leverage the [botbuilder generator](https://github.com/microsoft/BotBuilder-Samples/tree/main/generators/generator-botbuilder).
+To use the [Adaptive Card Transformer](https://github.com/retaildevcrews/AdaptiveCardTransformer), you will need plugins with particular function signatures, as well as a bot. To kickstart use of the `Adaptive Card Transformer` and ease integration, the `generator-AdaptiveCardTransformer` was created. This generator scaffolds plugins, an echo bot, and supports integration between the `Adaptive Card Transformer` and the echo bot. To scaffold an echo bot within the `generator-AdaptiveCardTransformer`, we will leverage the [botbuilder generator](https://github.com/microsoft/BotBuilder-Samples/tree/main/generators/generator-botbuilder) in our generator.
 
 ## Yeoman Workflow
 
-Running tasks in Yeoman sequentially is alright if there’s a single generator. However, since we will be calling the [botbuilder generator](https://github.com/microsoft/BotBuilder-Samples/tree/main/generators/generator-botbuilder) in our adapter generator, we will need to follow Yeoman's run loop, which is a queue system with priority support. Priorities are defined in your code as special prototype method names. Any method not using the special prototype name will be pushed in the default group. Any private methods (pefixed by an underscore (e.g. `_private_method`) will not be pushed to the `default` group.
+Running tasks in Yeoman sequentially is alright if there’s a single generator. However, since we will be calling the [botbuilder generator](https://github.com/microsoft/BotBuilder-Samples/tree/main/generators/generator-botbuilder) in our adapter generator, we will need to follow Yeoman's run loop, which is a queue system with priority support. Priorities are defined in your code as special prototype method names. Any method not using the special prototype name will be pushed in the default group. Any private methods (prefixed by an underscore (e.g. `_private_method`) will not be pushed to the `default` group.
 
 The priority order for Yeoman is documented [here](https://yeoman.io/authoring/running-context.html).
 
@@ -34,11 +34,11 @@ Our yeoman generator is private, yet we would like to call the public [botbuilde
 
 ### Solution
 
-Yeoman offers multiple ways for generators to build upon common ground. The `composeWith` method allows the generator to run side-by-side with another generator (or subgenerator). That way it can use features from the other generator instead of having to do it all by itself. Refer to Yeoman's composibility [documentation](https://yeoman.io/authoring/composability.html).
+Yeoman offers multiple ways for generators to build upon common ground. The `composeWith` method allows the generator to run side-by-side with another generator (or subgenerator). That way it can use features from the other generator instead of having to do it all by itself. Refer to Yeoman's composability [documentation](https://yeoman.io/authoring/composability.html).
 
 `composeWith` takes two parameters: `generatorPath` - A full path pointing to the generator you want to compose with (usually using require.resolve()) and `options` - An Object containing options to pass to the composed generator once it runs.
 
-Run on its own, the botbuilder generator prompts users for their `botname`, `description`, `language`, and `template` (echo, core, empty). Once answered, the botbuilder generator creates a directory with the user inputed `botname` and copies all of the needed files into that directory.
+Run on its own, the botbuilder generator prompts users for their `botname`, `description`, `language`, and `template` (echo, core, empty). Once answered, the botbuilder generator creates a directory with the user prompted `botname` and copies all of the needed files into that directory.
 
 The desired Yeoman workflow for our generator would be to:
 
@@ -47,7 +47,7 @@ The desired Yeoman workflow for our generator would be to:
 1. Add the adapter dependency to the bot and override the index.js file in the bot to call the adapter
 1. Ask the user if they would like to add any plugins - if so, create the files/directory structure needed for template selector, pre-processor, and post-processor
 
-Rather than have the botbuilder generator prompt the user, we would prefer that our generator prompt the user. Therefore, our generator can store user responses and govern next actions depending on these user responses. Overriding the index.js file (step 3 above) from our generator would require knowedge of the user's response to `language` and `template` for their bot as well as location of the bot files (`botname` directory).
+Rather than have the botbuilder generator prompt the user, we would prefer that our generator prompt the user. Therefore, our generator can store user responses and govern next actions depending on these user responses. Overriding the index.js file (step 3 above) from our generator would require knowledge of the user's response to `language` and `template` for their bot as well as location of the bot files (`botname` directory).
 
 Thus, we will need to leverage the `composeWith` `options` parameter. We will need to create prompts in our generator to prompt the user for `botname`, `description`, `language`, and `template`. We will need to pass our user responses to the botbuilder generator and disable prompting from the botbuilder generator directly.
 
