@@ -89,7 +89,7 @@ module.exports = class extends Generator {
 			// Running botbuilder generator as sub generator
 			// Do not let the botbuilder generator prompt user, rather pass in user responses from the adapter generator
 			this.composeWith(require.resolve("generator-botbuilder/generators/app"), {
-				"skip-install": true,
+				skipInstall: true,
 				noprompt: true,
 				botname: this.answersBot.botname,
 				description: this.answersBot.description,
@@ -127,16 +127,17 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
-		// we will always copy over the templateSelector because it is required for use with  the adapter
-		var pluginsPath = "."
+		// we will always copy over the templateSelector because it is required for use with the adapter
 		if (this.answersAdapter.bot == "createBot") {
-			pluginsPath = this.answersBot.botname
+			this.destinationRoot(
+				`${this.destinationRoot()}/${this.answersBot.botname}`,
+			)
 		}
 
 		this.log("Creating template-selector plugin...")
 		this.fs.copy(
 			this.templatePath(`templateSelector`),
-			this.destinationPath(pluginsPath + "/plugins/templateSelector"),
+			this.destinationPath("plugins/templateSelector"),
 		)
 
 		// adding additional plugins based on user response
@@ -146,43 +147,43 @@ module.exports = class extends Generator {
 			this.log("Creating pre-processor and post-processor plugins...")
 			this.fs.copy(
 				this.templatePath(`preProcessor`),
-				this.destinationPath(pluginsPath + "/plugins/preProcessor"),
+				this.destinationPath("plugins/preProcessor"),
 			)
 
 			this.fs.copy(
 				this.templatePath(`postProcessor`),
-				this.destinationPath(pluginsPath + "/plugins/postProcessor"),
+				this.destinationPath("plugins/postProcessor"),
 			)
 
 			this.fs.copy(
 				this.templatePath(`pluginConfigs/pluginConfigAll.json`),
-				this.destinationPath(pluginsPath + "/plugins/pluginConfig.json"),
+				this.destinationPath("plugins/pluginConfig.json"),
 			)
 		} else if (this.answersPlugin.plugins == "includePreProcessor") {
 			this.log("Creating pre-processor plugin...")
 			this.fs.copy(
 				this.templatePath(`preProcessor`),
-				this.destinationPath(pluginsPath + "/plugins/preProcessor"),
+				this.destinationPath("plugins/preProcessor"),
 				this.fs.copy(
 					this.templatePath(`pluginConfigs/pluginConfigPre.json`),
-					this.destinationPath(pluginsPath + "/plugins/pluginConfig.json"),
+					this.destinationPath("plugins/pluginConfig.json"),
 				),
 			)
 		} else if (this.answersPlugin.plugins == "includePostProcessor") {
 			this.log("Creating post-processor plugin...")
 			this.fs.copy(
 				this.templatePath(`postProcessor`),
-				this.destinationPath(pluginsPath + "/plugins/postProcessor"),
+				this.destinationPath("plugins/postProcessor"),
 				this.fs.copy(
 					this.templatePath(`pluginConfigs/pluginConfigPost.json`),
-					this.destinationPath(pluginsPath + "/plugins/pluginConfig.json"),
+					this.destinationPath("plugins/pluginConfig.json"),
 				),
 			)
 		} else {
 			this.log("User did not select any additional plugins")
 			this.fs.copy(
 				this.templatePath(`pluginConfigs/pluginConfigTemplateSelector.json`),
-				this.destinationPath(pluginsPath + "/plugins/pluginConfig.json"),
+				this.destinationPath("plugins/pluginConfig.json"),
 			)
 		}
 	}
@@ -258,7 +259,7 @@ module.exports = class extends Generator {
 		}
 	}
 
-	install() {
+	end() {
 		if (this.answersAdapter.bot == "createBot") {
 			// integrate adapter into bot by overwriting package.json, tsconfig and bot.ts/bot.js files
 			this._overwriteBot()
@@ -267,9 +268,13 @@ module.exports = class extends Generator {
 				"To manually integrate the Adaptive Card Transformer into your bot, please refer to steps found in https://github.com/retaildevcrews/AdaptiveCardTransformer/blob/main/docs/HowToIntegrate.md",
 			)
 		}
-	}
 
-	end() {
+		this.log(
+			chalk.red(
+				"\nMake sure to populate .npmrc and then run `npm install`. Please refer to steps found in https://github.com/retaildevcrews/AdaptiveCardTransformer/blob/main/docs/HowToIntegrate.md\n",
+			),
+		)
+
 		this.log(
 			"Thanks for using the Adaptive Card Transformer generator. Go add logic to your plugins!",
 		)
