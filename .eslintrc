@@ -1,10 +1,16 @@
 {
 	"root": true,
-	"parser": "@typescript-eslint/parser",
-	"plugins": ["@typescript-eslint"],
+	"env": {
+		"es2020": true,
+		"node": true
+	},
+	// ===========================================
+	// Set up ESLint for .js / .jsx files
+	// ===========================================
 	"extends": [
-		"plugin:diff/diff",
-		"plugin:@typescript-eslint/recommended",
+		"eslint:recommended",
+		// Disable rules that conflict with Prettier
+		// Prettier must be last to override other configs
 		"prettier"
 	]
 }

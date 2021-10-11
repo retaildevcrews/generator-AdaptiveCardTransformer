@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 "use strict"
 const Generator = require("yeoman-generator")
 const chalk = require("chalk")
 const yosay = require("yosay")
-//const botbuilder = require('generator-botbuilder')
 
 module.exports = class extends Generator {
 	initializing() {
