@@ -267,7 +267,6 @@ module.exports = class extends Generator {
 				"To manually integrate the Adaptive Card Transformer into your bot, please refer to steps found in https://github.com/retaildevcrews/AdaptiveCardTransformer/blob/main/docs/HowToIntegrate.md",
 			)
 		}
-		this.npmInstall()
 	}
 
 	end() {

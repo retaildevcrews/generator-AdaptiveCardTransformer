@@ -1,6 +1,10 @@
-# generator-adaptive-card-transformer
+# generator-AdaptiveCardTransformer
 
-> Utilize Yeoman to create a bot and plugins for use with the [AdaptiveCardTransformer]
+> Yeoman generator for the [adaptive-card-transformer](https://github.com/retaildevcrews/AdaptiveCardTransformer). This generator will let you quickly set up an echo bot and plugins for use with the `adaptive-card-transformer`.
+
+## About
+
+To use the [adaptive-card-transformer](https://github.com/retaildevcrews/AdaptiveCardTransformer), you will need a bot and plugins. If you do not already have a bot, you can create a new echo bot with the `generator-AdaptiveCardTransformer`. After scaffolding the echo bot and selected plugins, the generator will prompt the user to integrate the `adaptive-card-transformer` and plugins into the provided echo bot. If you already have a bot, you will need to manually integrate the `adaptive-card-transformer` and plugins into your bot. For manual integration, please refer to this [documentation](https://github.com/retaildevcrews/AdaptiveCardTransformer/blob/main/docs/HowToIntegrate.md)
 
 ## Related Projects
 
@@ -42,8 +46,30 @@ npm link             // creates a local package of the adaptive-card-transformer
 Navigate to the directory where you want to use the adaptive-card-transformer and run:
 
 ```bash
-yo adaptive-card-transformer     // files will be generated in your current directory
+yo @retaildevcrews/adaptive-card-transformer     // files will be generated in your current directory
 ```
+
+## Run your scaffolded bot and plugins
+
+If you selected to create an echo bot with your plugins, you can run your project locally after the Yeoman generator completes.
+
+1. Open `.npmrc` in your project's root directory
+
+   - Replace `TOKEN` in `.npmrc` with your own created token:
+
+   ```sh
+   //npm.pkg.github.com/:_authToken=TOKEN
+   @retaildevcrews:registry=https://npm.pkg.github.com
+   ```
+
+1. Run `npm install` to ensure the `adaptive-card-transformer` was installed
+
+1. Run `npm start`
+
+1. Launch Bot Framework Emulator
+   - File -> Open Bot
+   - Enter a Bot URL of `http://localhost:3978/api/messages`
+   - Once the Emulator is connected, you can interact with and receive messages from your bot.
 
 ## How to file issues and get help
 
