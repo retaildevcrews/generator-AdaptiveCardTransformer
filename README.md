@@ -24,13 +24,13 @@ First, install [Yeoman](http://yeoman.io) and generator-adaptive-card-transforme
 
 ```bash
 npm install -g yo
-npm install -g generator-adaptive-card-transformer
+npm install -g @retaildevcrews/generator-adaptive-card-transformer
 ```
 
 Then generate your new project:
 
 ```bash
-yo generator-adaptive-card-transformer
+yo @retaildevcrews/adaptive-card-transformer
 ```
 
 ## Getting To Know Yeoman
