@@ -1,6 +1,6 @@
 {
 	"name": "@retaildevcrews/generator-adaptive-card-transformer",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Create plugins for use with adapter",
 	"main": "generators/index.js",
 	"files": [
