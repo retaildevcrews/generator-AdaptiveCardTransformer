@@ -12,7 +12,7 @@ There are three related repositories for the Adaptive Card Transformer:
 
 - [AdaptiveCardTransformer] - The easy-to-use adapter enabling back-end NLU responses to be rendered through Adaptive Card functionality with an extendable plugin pattern
 - [AdaptiveCardTransformerExampleBot] - The Teams bot example implementation that uses the `adaptive-card-transformer`
-- [generator-AdaptiveCardTransformer] - The Yeoman generator for scaffolding plugins using the `adaptive-card-transoformer`
+- [generator-AdaptiveCardTransformer] (this repository) - The Yeoman generator for scaffolding plugins using the `adaptive-card-transoformer`
 
 [adaptivecardtransformer]: https://github.com/retaildevcrews/AdaptiveCardTransformer
 [adaptivecardtransformerexamplebot]: https://github.com/retaildevcrews/AdaptiveCardTransformerExampleBot
